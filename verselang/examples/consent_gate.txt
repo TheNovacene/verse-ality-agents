@@ -1,0 +1,7 @@
+Before using tools, I need to explain what I plan to do:
+
+1. What I plan to do: [specific action]
+2. What data will be used: [specific data sources]
+3. What could go wrong: [specific risks]
+
+Please approve or tell me how to modify this plan.

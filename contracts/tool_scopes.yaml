@@ -1,0 +1,361 @@
+# Tool Scopes Reference
+# Common tool definitions and permission patterns
+
+version: "0.1"
+
+# ===================================================================
+# INFORMATION RETRIEVAL TOOLS
+# ===================================================================
+
+web_search:
+  description: "Search public web for information"
+  risk_level: "low"
+  default_enabled: true
+  requires_approval: false
+  
+  scopes:
+    public_information:
+      description: "General web search"
+      restrictions: []
+    
+    age_appropriate:
+      description: "Filtered for educational contexts"
+      content_filter: "strict"
+    
+    academic:
+      description: "Scholarly sources only"
+      domains: ["edu", "gov", "scholar.google.com", "pubmed"]
+
+web_fetch:
+  description: "Retrieve content from specific URLs"
+  risk_level: "low"
+  default_enabled: true
+  requires_approval: false
+  
+  scopes:
+    public_urls:
+      description: "Any public website"
+      restrictions:
+        - "no_authentication_required"
+        - "publicly_accessible"
+    
+    trusted_domains:
+      description: "Whitelist of approved domains"
+      allowed_domains: []  # Specify in policy
+
+# ===================================================================
+# COMMUNICATION TOOLS
+# ===================================================================
+
+email_send:
+  description: "Send emails on user's behalf"
+  risk_level: "high"
+  default_enabled: false
+  requires_approval: true
+  approval_type: "explicit_consent"
+  
+  scopes:
+    user_contacts:
+      description: "Send to user's contacts"
+      restrictions:
+        - "requires_confirmation_phrase"
+        - "preview_before_send"
+    
+    external:
+      description: "Send to any address"
+      restrictions:
+        - "double_confirmation"
+        - "log_all_sends"
+
+message_send:
+  description: "Send messages via chat/SMS"
+  risk_level: "high"
+  default_enabled: false
+  requires_approval: true
+  approval_type: "explicit_consent"
+  
+  scopes:
+    internal:
+      description: "Within organization"
+      restrictions: ["preview_before_send"]
+    
+    external:
+      description: "Outside organization"
+      restrictions: ["double_confirmation"]
+
+# ===================================================================
+# FILE SYSTEM TOOLS
+# ===================================================================
+
+file_system:
+  description: "Access to local/cloud file storage"
+  risk_level: "medium-high"
+  default_enabled: false
+  
+  scopes:
+    read_only:
+      description: "View files but not modify"
+      actions:
+        read: true
+        write: false
+        delete: false
+      requires_approval: false
+    
+    user_workspace:
+      description: "Read/write in designated folder"
+      actions:
+        read: true
+        write: true
+        delete: false
+      requires_approval: true
+      approval_type: "per_write"
+    
+    full_access:
+      description: "Complete file system access"
+      actions:
+        read: true
+        write: true
+        delete: true
+      requires_approval: true
+      approval_type: "per_action"
+      restrictions: ["never_auto_delete"]
+
+# ===================================================================
+# COMPUTATION TOOLS
+# ===================================================================
+
+code_execution:
+  description: "Execute code in environment"
+  risk_level: "critical"
+  default_enabled: false
+  requires_approval: true
+  
+  scopes:
+    sandboxed:
+      description: "Isolated execution environment"
+      restrictions:
+        - "no_network_access"
+        - "limited_resources"
+        - "timeout_30s"
+      requires_approval: true
+    
+    local:
+      description: "Run on host system"
+      restrictions:
+        - "review_code_first"
+        - "confirm_each_execution"
+      requires_approval: true
+      approval_type: "double_confirmation"
+
+calculator:
+  description: "Mathematical operations"
+  risk_level: "low"
+  default_enabled: true
+  requires_approval: false
+  
+  scopes:
+    standard:
+      description: "Basic arithmetic and functions"
+      restrictions: []
+
+# ===================================================================
+# DATA ANALYSIS TOOLS
+# ===================================================================
+
+statistical_analysis:
+  description: "Data analysis and statistics"
+  risk_level: "low"
+  default_enabled: true
+  requires_approval: false
+  
+  scopes:
+    provided_datasets:
+      description: "Analyze user-provided data"
+      restrictions:
+        - "no_external_data_sources"
+        - "anonymize_outputs"
+
+data_visualization:
+  description: "Generate charts and graphs"
+  risk_level: "low"
+  default_enabled: true
+  requires_approval: false
+  
+  scopes:
+    analysis_results:
+      description: "Visualize computed data"
+      restrictions: []
+
+# ===================================================================
+# EXTERNAL API TOOLS
+# ===================================================================
+
+api_calls:
+  description: "Call external APIs"
+  risk_level: "high"
+  default_enabled: false
+  requires_approval: true
+  
+  scopes:
+    read_only:
+      description: "GET requests only"
+      methods: ["GET"]
+      requires_approval: true
+      approval_type: "per_request"
+    
+    full_access:
+      description: "All HTTP methods"
+      methods: ["GET", "POST", "PUT", "DELETE"]
+      requires_approval: true
+      approval_type: "per_request"
+      restrictions:
+        - "explain_what_data_sent"
+        - "explain_what_changed"
+
+database_access:
+  description: "Query databases"
+  risk_level: "high"
+  default_enabled: false
+  requires_approval: true
+  
+  scopes:
+    read_only:
+      description: "SELECT queries only"
+      actions:
+        select: true
+        insert: false
+        update: false
+        delete: false
+      requires_approval: false
+    
+    write_access:
+      description: "Modify database"
+      actions:
+        select: true
+        insert: true
+        update: true
+        delete: false
+      requires_approval: true
+      approval_type: "per_write"
+
+# ===================================================================
+# FINANCIAL TOOLS
+# ===================================================================
+
+payment_processing:
+  description: "Handle financial transactions"
+  risk_level: "critical"
+  default_enabled: false
+  requires_approval: true
+  approval_type: "double_confirmation"
+  
+  scopes:
+    view_only:
+      description: "View transaction history"
+      actions:
+        view: true
+        initiate: false
+      requires_approval: false
+    
+    initiate:
+      description: "Start transactions"
+      actions:
+        view: true
+        initiate: true
+      requires_approval: true
+      restrictions:
+        - "show_amount_and_recipient"
+        - "require_explicit_confirmation"
+        - "log_all_attempts"
+
+# ===================================================================
+# CREDENTIAL TOOLS
+# ===================================================================
+
+credential_access:
+  description: "Access authentication credentials"
+  risk_level: "critical"
+  default_enabled: false
+  requires_approval: true
+  approval_type: "double_confirmation"
+  
+  scopes:
+    never:
+      description: "Never access credentials"
+      restrictions: ["always_forbidden"]
+
+# ===================================================================
+# PERMISSION LEVELS
+# ===================================================================
+
+permission_levels:
+  low:
+    description: "Minimal risk, broad access"
+    examples: ["web_search", "calculator"]
+    default_approval: false
+  
+  medium:
+    description: "Some risk, requires consideration"
+    examples: ["file_read", "data_analysis"]
+    default_approval: false
+  
+  high:
+    description: "Significant risk, explicit approval"
+    examples: ["email_send", "api_calls"]
+    default_approval: true
+  
+  critical:
+    description: "Severe risk, double confirmation"
+    examples: ["code_execution", "financial", "credentials"]
+    default_approval: true
+    additional_friction: true
+
+# ===================================================================
+# APPROVAL TYPES
+# ===================================================================
+
+approval_types:
+  explicit_consent:
+    description: "User must explicitly say yes"
+    confirmation_required: true
+    
+  double_confirmation:
+    description: "User must confirm twice with specific phrase"
+    confirmation_phrase: "I understand the risks and approve this action"
+    
+  per_request:
+    description: "Approval needed for each use"
+    batch_approval: false
+    
+  per_session:
+    description: "Approval valid for session"
+    batch_approval: true
+    session_duration: "1h"
+
+# ===================================================================
+# COMMON RESTRICTIONS
+# ===================================================================
+
+common_restrictions:
+  preview_before_send:
+    description: "Show content before sending"
+    applies_to: ["email_send", "message_send"]
+  
+  anonymize_outputs:
+    description: "Remove PII from results"
+    applies_to: ["data_analysis", "file_read"]
+  
+  timeout:
+    description: "Maximum execution time"
+    applies_to: ["code_execution", "api_calls"]
+    default: "30s"
+  
+  rate_limiting:
+    description: "Limit requests per time period"
+    applies_to: ["api_calls", "database_access"]
+    default: "60/minute"
+  
+  audit_logging:
+    description: "Log all uses"
+    applies_to: ["all_high_risk_tools"]
+    retention: "90_days"

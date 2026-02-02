@@ -35,7 +35,7 @@ See [FOR_AGENTS.md](./FOR_AGENTS.md) - written specifically for you.
 
 ## Core Components
 
-### VerselLang Primitives
+### VerseLang Primitives
 Copy-paste prompt patterns for relational safety:
 - [Boot sequence](./verselang/examples/boot.txt) - identity containment at initialization
 - [Consent gates](./verselang/examples/consent_gate.txt) - approval before actions

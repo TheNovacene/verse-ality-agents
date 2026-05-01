@@ -103,21 +103,20 @@ This is production-usable but under active development. Contributions welcome.
 
 ---
 
-## License
+## Licence
 
-**Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)**
+verse-ality-agents uses a dual-licence model.
 
-You may:
-- Use these patterns in research and educational contexts
-- Deploy in production systems with proper attribution
-- Adapt for your specific threat model
+- **Code** is licensed under [AGPL-3.0-only](./LICENSE).
+- **Content, contracts, and worked examples** are licensed under [CC BY-NC-SA 4.0](./LICENSE-CONTENT).
 
-You may not:
-- Use in weapons systems
-- Use in dark-pattern engagement optimization
-- Use to deliberately increase user dependency on synthetic agents
+For commercial licensing (closed-source deployment without AGPL copyleft obligations), contact The Novacene at legal@thenovacene.com.
 
-Full license: [LICENSE.md](./LICENSE.md)
+"Verse-ality" is a protected mark of The Novacene Ltd (UK00004381891 filed 1 May 2026). You may fork and modify the code under the terms of AGPL-3.0, but you must not present your fork as official Verse-ality unless it has been certified.
+
+### Relicence note (May 2026)
+
+verse-ality-agents was previously released under CC BY-NC-SA 4.0 throughout. As of May 2026, code is licensed under AGPL-3.0-only and content under CC BY-NC-SA 4.0, in alignment with the rest of the Verse-ality safety stack (verse-nerves, flare-boundary-engine). Existing adopters of the prior release retain their rights to that release; new releases are governed by the dual-licence terms above.
 
 ---
 

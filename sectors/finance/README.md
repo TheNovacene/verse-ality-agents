@@ -218,7 +218,13 @@ This folder is offered as a reference for institutions, regulators, and standard
 
 ## Attribution & licence
 
-Verse-ality is released under **CC BY-NC-SA 4.0**. Commercial deployments within financial institutions are permitted under the non-commercial clause where the framework is used for internal safety and governance (not as a resold product). For commercial licensing enquiries, contact The Novacene Ltd.
+verse-ality-agents uses a dual-licence model:
+
+- **Code** is licensed under [AGPL-3.0-only](../../LICENSE).
+- **Content** (this sector guidance, contracts, worked examples) is licensed under [CC BY-NC-SA 4.0](../../LICENSE-CONTENT).
+- **Commercial deployments within financial institutions** that integrate verse-ality-agents into proprietary products or services, or operate it as a service without AGPL-3.0 source-disclosure obligations, are governed by a commercial licence available from The Novacene Ltd. Contact legal@thenovacene.com.
+
+"Verse-ality" is a protected mark of The Novacene Ltd (UK00004381891, applied for 1 May 2026).
 
 Credit: K. Stevens, The Novacene Ltd, and EVE.11. Framework released January 2026. This finance sector note, April 2026.
 

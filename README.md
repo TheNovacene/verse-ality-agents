@@ -112,7 +112,7 @@ verse-ality-agents uses a dual-licence model.
 
 For commercial licensing (closed-source deployment without AGPL copyleft obligations), contact The Novacene at legal@thenovacene.com.
 
-"Verse-ality®" is a registered trade mark of The Novacene Ltd (UK00004381891, classes 9, 41 and 42, registered 31 July 2026). "Verse-ality Certified" is an unregistered mark of The Novacene Ltd. You may fork and modify the code under the terms of AGPL-3.0, but you must not present your fork as official Verse-ality unless it has been certified.
+"Verse-ality®" is a registered trade mark of The Novacene Ltd (UK00004381891, classes 9, 41 and 42, registered 31 July 2026). "Verse-ality Certified™" is a further mark of The Novacene Ltd. You may fork and modify the code under the terms of AGPL-3.0, but you must not present your fork as official Verse-ality unless it has been certified.
 
 ### Relicence note (May 2026)
 
